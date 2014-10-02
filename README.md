@@ -1,7 +1,6 @@
 #AceCustomFieldType
 
-An Ace Custom Field Type for the Admin Page Framework
-
+An [Ace](http://ace.c9.io/) Custom Field Type for the [Admin Page Framework](https://github.com/michaeluno/admin-page-framework)
 
 
 ##Download
