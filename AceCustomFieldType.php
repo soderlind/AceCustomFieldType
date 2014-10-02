@@ -76,7 +76,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 
 	            var sMode = oTextarea.data('ace_language');
 	            var sTheme = oTextarea.data('ace_theme');
-				var bShow_gutter = ( undefined != oTextarea.data('ace_show_gutter') ) ? oTextarea.data('ace_show_gutter') : 'true';
+				var bShow_gutter = ( undefined !== oTextarea.data('ace_show_gutter') ) ? oTextarea.data('ace_show_gutter') : 'true';
 
 	            var oEditDiv = jQuery('<div>', {
 	                position: 'absolute',

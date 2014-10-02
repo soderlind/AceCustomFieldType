@@ -30,7 +30,7 @@ class My_Settings extends AdminPageFramework {
 		/* add section etc */
 
         $this->addSettingFields(
-            array(  // Text Area
+            array(  // Ace Custom Field
                 'field_id'         => 'style_editor',
                 'section_id'       => 'a_section',
                 'title'           => __('Style Editor', 'l10n' ),
