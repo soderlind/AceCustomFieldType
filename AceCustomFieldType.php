@@ -13,31 +13,31 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 	/**
 	 * Defines the default key-values of this field type settings.
 	 *
-	 * @remark          $_aDefaultKeys holds shared default key-values defined in the base class.
+	 * @remark\t^t  $_aDefaultKeys holds shared default key-values defined in the base class.
 	 */
 	protected $aDefaultKeys = array(
-		'type'          => 'textarea',
-		'attributes'    =>  array(
-			'cols'          => 60,
-			'rows'          => 4,
+		'type'		  => 'textarea',
+		'attributes'	=>  array(
+			'cols'		  => 60,
+			'rows'		  => 4,
 		),
 		//
-        'options'   => array(
-        	'language'      			=> 'css',
-        	'theme'         			=> 'chrome',
-            // 'soft_wrap'                 => 'off', //40, 80, free
-            // 'folding'                   => true,
-            // 'highlight_active'          => true,
-            // 'show_hidden'               => true,
-            // 'show_gutter'               => true,
-            // 'show_print_margin'         => true,
-            // 'highlight_selected_word'   => true,
-            // 'show_hscroll'              => true,
-            // 'show_vscroll'              => true,
-            // 'animate_scroll'            => true,
-            // 'soft_tab'                  => true,
-            // 'enable_behaviours'         => true,
-        ),
+		'options'   => array(
+			'language'	  			=> 'css',
+			'theme'		 			=> 'chrome',
+			// 'soft_wrap'				 => 'off', //40, 80, free
+			// 'folding'				   => true,
+			// 'highlight_active'		  => true,
+			// 'show_hidden'			   => true,
+			// 'show_gutter'			   => true,
+			// 'show_print_margin'		 => true,
+			// 'highlight_selected_word'   => true,
+			// 'show_hscroll'			  => true,
+			// 'show_vscroll'			  => true,
+			// 'animate_scroll'			=> true,
+			// 'soft_tab'				  => true,
+			// 'enable_behaviours'		 => true,
+		),
 	);
 
 
@@ -71,71 +71,71 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 		$_aJSArray = json_encode( $this->aFieldTypeSlugs );
 		return "jQuery( document ).ready( function(){
 			// Hook up ACE editor to all textareas with data-ace_language attribute, from: http://stackoverflow.com/a/19513428/1434155
-	        jQuery('textarea[data-ace_language]').each(function () {
-	            var oTextarea = jQuery(this);
+			jQuery('textarea[data-ace_language]').each(function () {
+				var oTextarea = jQuery(this);
 
-	            var sMode = oTextarea.data('ace_language');
-	            var sTheme = oTextarea.data('ace_theme');
+				var sMode = oTextarea.data('ace_language');
+				var sTheme = oTextarea.data('ace_theme');
 				var bShow_gutter = ( undefined !== oTextarea.data('ace_show_gutter') ) ? oTextarea.data('ace_show_gutter') : 'true';
 
-	            var oEditDiv = jQuery('<div>', {
-	                position: 'absolute',
-	                width: oTextarea.width(),
-	                height: oTextarea.height(),
-	                'class': oTextarea.attr('class')
-	            }).insertBefore(oTextarea);
+				var oEditDiv = jQuery('<div>', {
+					position: 'absolute',
+					width: oTextarea.width(),
+					height: oTextarea.height(),
+					'class': oTextarea.attr('class')
+				}).insertBefore(oTextarea);
 
-	            oTextarea.css('display', 'none');
+				oTextarea.css('display', 'none');
 
-	            var oEditor = ace.edit(oEditDiv[0]);
-	            oEditor.renderer.setShowGutter(bShow_gutter);
-	            oEditor.getSession().setValue(oTextarea.val());
-	            oEditor.getSession().setMode('ace/mode/' + sMode);
-	            if (sTheme) oEditor.setTheme('ace/theme/' + sTheme);
+				var oEditor = ace.edit(oEditDiv[0]);
+				oEditor.renderer.setShowGutter(bShow_gutter);
+				oEditor.getSession().setValue(oTextarea.val());
+				oEditor.getSession().setMode('ace/mode/' + sMode);
+				if (sTheme) oEditor.setTheme('ace/theme/' + sTheme);
 
-	            // copy back to textarea on form submit...
-	            oTextarea.closest('form').submit(function () {
-	                oTextarea.val(oEditor.getSession().getValue());
-	            })
-	        });
+				// copy back to textarea on form submit...
+				oTextarea.closest('form').submit(function () {
+					oTextarea.val(oEditor.getSession().getValue());
+				})
+			});
 
 
-            // jQuery().registerAPFCallback( {
+			// jQuery().registerAPFCallback( {
 
-            //     /**
-            //      * The repeatable field callback.
-            //      *
-            //      * When a repeat event occurs and a field is copied, this method will be triggered.
-            //      *
-            //      * @param	object	oCopied		the copied node object.
-            //      * @param	string	sFieldType	the field type slug
-            //      * @param	string	sFieldTagID	the field container tag ID
-            //      * @param	integer	iCallType	the caller type. 1 : repeatable sections. 0 : repeatable fields.
-            //      */
-            //     added_repeatable_field: function( oCopied, sFieldType, sFieldTagID, iCallType ) {
+			//	 /**
+			//	  * The repeatable field callback.
+			//	  *
+			//	  * When a repeat event occurs and a field is copied, this method will be triggered.
+			//	  *
+			//	  * @param	object	oCopied		the copied node object.
+			//	  * @param	string	sFieldType	the field type slug
+			//	  * @param	string	sFieldTagID	the field container tag ID
+			//	  * @param	integer	iCallType	the caller type. 1 : repeatable sections. 0 : repeatable fields.
+			//	  */
+			//	 added_repeatable_field: function( oCopied, sFieldType, sFieldTagID, iCallType ) {
 
-            //         /* If it is not this field type, do nothing. */
-            //         if ( jQuery.inArray( sFieldType, {$_aJSArray} ) <= -1 ) {
-            //             return;
-            //         }
+			//		 /* If it is not this field type, do nothing. */
+			//		 if ( jQuery.inArray( sFieldType, {$_aJSArray} ) <= -1 ) {
+			//			 return;
+			//		 }
 
-            //         /* If the input tag is not found, do nothing  */
-            //         var oLinkModalInput = oCopied.find( 'input.link_modal_dialog' );
-            //         if ( oLinkModalInput.length <= 0 ) {
-            //             return;
-            //         }
+			//		 /* If the input tag is not found, do nothing  */
+			//		 var oLinkModalInput = oCopied.find( 'input.link_modal_dialog' );
+			//		 if ( oLinkModalInput.length <= 0 ) {
+			//			 return;
+			//		 }
 
-            //         // Find the 'Select Link' button and update its id (it is copied so the id is still the same as the original one of the clone.)
-            //         var oLinkModalSelectButton = oCopied.find( '.select_link' );
+			//		 // Find the 'Select Link' button and update its id (it is copied so the id is still the same as the original one of the clone.)
+			//		 var oLinkModalSelectButton = oCopied.find( '.select_link' );
 
-            //         // Now attach the event.
-            //         oLinkModalSelectButton.link_modal_dialog();
+			//		 // Now attach the event.
+			//		 oLinkModalSelectButton.link_modal_dialog();
 
-            //     }
+			//	 }
 
-            // });
+			// });
 
-        });";
+		});";
 
 	}
 
@@ -145,8 +145,8 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 	protected function getStyles() {
 		return "/*Ace editor Custom Field Type*/
 			.ace_editor {
-			        position: relative !important;
-			        border: 1px solid lightgray;
+					position: relative !important;
+					border: 1px solid lightgray;
 			}
 		"  . PHP_EOL;
 	 }
@@ -166,7 +166,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 		return
 			$aField['before_label']
 			. "<div class='admin-page-framework-input-label-container'>"
-				. "<div class='repeatable-field-buttons'></div>"    // the repeatable field buttons will be replaced with this element.
+				. "<div class='repeatable-field-buttons'></div>"	// the repeatable field buttons will be replaced with this element.
 				. "<label for='{$aField['input_id']}'>"
 					. $aField['before_input']
 					. ( $aField['label'] && ! $aField['repeatable']
@@ -175,11 +175,11 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 					)
 
 					. "<textarea " . $this->generateAttributes( $aInputAttributes /*$aField['attributes']*/ ) . " >" // this method is defined in the base class
-                            . $aField['value']
-                    . "</textarea>"
+							. $aField['value']
+					. "</textarea>"
 
 
-					//. "<input " . $this->generateAttributes( $aInputAttributes ) . " />"    // this method is defined in the base class
+					//. "<input " . $this->generateAttributes( $aInputAttributes ) . " />"	// this method is defined in the base class
 					//. "<a href='#' id='select_{$aField['input_id']}' class='select_link button button-small' >" . __( 'Select Link', 'admin-page-framework' ) . "</a>"
 					. $aField['after_input']
 					//. $this->_getExtraInputs( $aField )
@@ -195,7 +195,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 
 	// 	return '<input ' . $this->generateAttributes(
 	// 			array(
-	// 				'id'    =>  "{$aField['input_id']}_title",
+	// 				'id'	=>  "{$aField['input_id']}_title",
 	// 				'type'  =>  'hidden',
 	// 				'name'  =>  "{$aField['_input_name']}[title]",
 	// 				'value' =>  isset( $aField['attributes']['value']['title'] ) ? $aField['attributes']['value']['title'] : '',
@@ -203,7 +203,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 	// 		) . '/>' . PHP_EOL
 	// 		. '<input ' . $this->generateAttributes(
 	// 			array(
-	// 				'id'    =>  "{$aField['input_id']}_target",
+	// 				'id'	=>  "{$aField['input_id']}_target",
 	// 				'type'  =>  'hidden',
 	// 				'name'  =>  "{$aField['_input_name']}[target]",
 	// 				'value' =>  isset( $aField['attributes']['value']['target'] ) ? $aField['attributes']['value']['target'] : '',
@@ -240,24 +240,24 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 	// 			this.on( 'click', function( event ) {
 
 	// 				// Find the input id and set the global variable.
-	// 				var oInput          = $( this ).siblings( '.link_modal_dialog' );
+	// 				var oInput		  = $( this ).siblings( '.link_modal_dialog' );
 	// 				sInputID_LinkModal  = oInput.attr( 'id' );
 
- //                    // for WP v3.8x or below
-	// 				wpActiveEditor      = oInput.attr( 'id' );
- //                    tinyMCEPopup        = 'undefined' !== typeof tinyMCEPopup ? tinyMCEPopup : null;
+ //					// for WP v3.8x or below
+	// 				wpActiveEditor	  = oInput.attr( 'id' );
+ //					tinyMCEPopup		= 'undefined' !== typeof tinyMCEPopup ? tinyMCEPopup : null;
 
- //                    // Open the modal dialog. Since v3.9, we can directly pass the element id to the parameter.
+ //					// Open the modal dialog. Since v3.9, we can directly pass the element id to the parameter.
 	// 				wpLink.open( oInput.attr( 'id' ) );
 
 	// 				return false;
 
 	// 			});
 
- //                this.on( 'wplink-close', function() {
- //                    console.log( 'closed' );
- //                    console.log( arguments );
- //                });
+ //				this.on( 'wplink-close', function() {
+ //					console.log( 'closed' );
+ //					console.log( arguments );
+ //				});
 
 	// 		};
 
