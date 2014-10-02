@@ -41,6 +41,10 @@ class My_Settings extends AdminPageFramework {
                     'rows'  =>  8,
                     'cols'  =>  85,
                 ),
+                'options'   => array(
+        			'language'      			=> 'css',
+        			'theme'         			=> 'chrome',
+        		)
             )
         );
     }
