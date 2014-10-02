@@ -7,14 +7,14 @@ An [Ace](http://ace.c9.io/) Custom Field Type for the [Admin Page Framework](htt
 ##Download
 To clone AceCustomFieldType, including the `ace-builds` [submodule](https://github.com/ajaxorg/ace-builds), you need to use the git `--recursive` parameter: 
 
-`git clone --recursive https://github.com/soderlind/AceCustomFieldType.git`
+	git clone --recursive https://github.com/soderlind/AceCustomFieldType.git
 
 If you forget to add the submodule, do
 
-`
-git submodule init
-git submodule update
-`
+
+	git submodule init
+	git submodule update
+
 
 
 ##Adding AceCustomFieldType
