@@ -9,7 +9,7 @@ To clone AceCustomFieldType, including the `ace-builds` [submodule](https://gith
 
 	git clone --recursive https://github.com/soderlind/AceCustomFieldType.git
 
-If you forget to add the submodule, do
+If you forgot to add the submodule, do
 
 
 	git submodule init
