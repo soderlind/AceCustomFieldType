@@ -50,8 +50,10 @@ class My_Settings extends AdminPageFramework {
                     'cols'  =>  85,
                 ),
                 'options'   => array(
-        			'language'      			=> 'css',
-        			'theme'         			=> 'chrome',
+					'language'            => 'css', // available languages https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
+					'theme'               => 'chrome', //available themes https://github.com/ajaxorg/ace/tree/master/lib/ace/theme
+					'gutter'              => true,
+					'readonly'            => false
         		)
             )
         );
@@ -59,6 +61,10 @@ class My_Settings extends AdminPageFramework {
 }
 ```
 
+##Todo
+* Add repeater
+
 ##Changelog
+* 0.0.2 Keeping it simple, AceCustomFieldType is feature complete ie you can cange language and theme, enable/disable gutter and make it readonly.
 * 0.0.1 Initial working release, there's still a lot todo
 
