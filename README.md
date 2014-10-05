@@ -45,16 +45,18 @@ class My_Settings extends AdminPageFramework {
                 'description'     => __('Type a text string here.', 'l10n' ),
                 'type'            => 'ace',
                 'default'           => '',
+                // The attributes below are the defaults, i.e. if you want theses you don't have to set them
                 'attributes'    =>  array(
-                    'rows'  =>  8,
-                    'cols'  =>  85,
+                    'cols'  =>  60,
+                    'rows'  =>  4,
                 ),
+                // The options below are the  defaults, i.e. if you want theses you don't have to set them
                 'options'   => array(
 					'language'            => 'css', // available languages https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
 					'theme'               => 'chrome', //available themes https://github.com/ajaxorg/ace/tree/master/lib/ace/theme
-					'gutter'              => true,
+					'gutter'              => false,
 					'readonly'            => false,
-					'fontsize'            => 16,
+					'fontsize'            => 12,
         		)
             )
         );
