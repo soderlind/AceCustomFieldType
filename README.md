@@ -2,7 +2,7 @@
 
 An [Ace](http://ace.c9.io/) Custom Field Type for the [Admin Page Framework](https://github.com/michaeluno/admin-page-framework)
 
-[![AceCustomFieldType - 'gutter' => true](AceCustomFieldType.png)]
+![AceCustomFieldType - 'gutter' => true](AceCustomFieldType.png)
 
 ##Download
 To clone AceCustomFieldType, including the `ace-builds` [submodule](https://github.com/ajaxorg/ace-builds), you need to use the git `--recursive` parameter: 
