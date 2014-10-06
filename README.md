@@ -39,24 +39,25 @@ class My_Settings extends AdminPageFramework {
 
         $this->addSettingFields(
             array(  // Ace Custom Field
-                'field_id'         => 'style_editor',
-                'section_id'       => 'a_section',
-                'title'           => __('Style Editor', 'l10n' ),
-                'description'     => __('Type a text string here.', 'l10n' ),
-                'type'            => 'ace',
+                'field_id'          => 'style_editor',
+                'section_id'        => 'a_section',
+                'title'             => __('Style Editor', 'l10n' ),
+                'description'       => __('Type a text string here.', 'l10n' ),
+                'type'              => 'ace',
                 'default'           => '',
+                //'repeatable'        => true,
                 // The attributes below are the defaults, i.e. if you want theses you don't have to set them
-                'attributes'    =>  array(
-                    'cols'  =>  60,
-                    'rows'  =>  4,
+                'attributes' =>  array(
+                    'cols'          =>  60,
+                    'rows'          =>  4,
                 ),
                 // The options below are the  defaults, i.e. if you want theses you don't have to set them
-                'options'   => array(
-					'language'            => 'css', // available languages https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
-					'theme'               => 'chrome', //available themes https://github.com/ajaxorg/ace/tree/master/lib/ace/theme
-					'gutter'              => false,
-					'readonly'            => false,
-					'fontsize'            => 12,
+                'options'    => array(
+					'language'      => 'css', // available languages https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
+					'theme'         => 'chrome', //available themes https://github.com/ajaxorg/ace/tree/master/lib/ace/theme
+					'gutter'        => false,
+					'readonly'      => false,
+					'fontsize'      => 12,
         		)
             )
         );
@@ -64,10 +65,9 @@ class My_Settings extends AdminPageFramework {
 }
 ```
 
-##Todo
-* Add repeater
 
 ##Changelog
+* 0.0.3 Added support for `'repeatable' => true`
 * 0.0.2 Keeping it simple, AceCustomFieldType is feature complete, i.e. you can change language, theme and fontsize, enable/disable gutter and make it readonly.
 * 0.0.1 Initial working release, there's still a lot todo
 

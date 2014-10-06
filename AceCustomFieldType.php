@@ -16,7 +16,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
      * @remark\t^t  $_aDefaultKeys holds shared default key-values defined in the base class.
      */
     protected $aDefaultKeys = array(
-        //'type'        => 'textarea',
+        'type'        => 'textarea',
         'attributes'    =>  array(
             'cols'        => 60,
             'rows'        => 4,
@@ -61,81 +61,76 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 //      add_action( 'admin_footer', array( $this, '_replyToAddLinkModalQueryPlugin' ) );
         $_aJSArray = json_encode( $this->aFieldTypeSlugs );
         return "jQuery( document ).ready( function(){
-            // Hook up ACE editor to all textareas with data-ace_language attribute, from: http://stackoverflow.com/a/19513428/1434155
-            jQuery('textarea[data-ace_language]').each(function () {
-                var oTextarea = jQuery(this);
 
-                var sMode = oTextarea.data('ace_language');
-                var sTheme = oTextarea.data('ace_theme');
-                var bGutter = ( undefined !== oTextarea.data('ace_gutter') ) ? oTextarea.data('ace_gutter') : 1;
-                var bReadonly = ( undefined !== oTextarea.data('ace_readonly') ) ? oTextarea.data('ace_readonly') : 0;
-                var sFontsize = ( undefined !== oTextarea.data('ace_fontsize') ) ? oTextarea.data('ace_fontsize') : 12;
+            // Add Ace editor to textarea  from: http://stackoverflow.com/a/19513428/1434155
+            var addAceEditor = function(oTextArea) {
+
+                var sMode = oTextArea.data('ace_language');
+                var sTheme = oTextArea.data('ace_theme');
+                var bGutter = ( undefined !== oTextArea.data('ace_gutter') ) ? oTextArea.data('ace_gutter') : 1;
+                var bReadonly = ( undefined !== oTextArea.data('ace_readonly') ) ? oTextArea.data('ace_readonly') : 0;
+                var sFontsize = ( undefined !== oTextArea.data('ace_fontsize') ) ? oTextArea.data('ace_fontsize') : 12;
 
                 var oEditDiv = jQuery('<div>', {
                     position: 'absolute',
-                    width: oTextarea.width(),
-                    height: oTextarea.height(),
-                    'class': oTextarea.attr('class')
-                }).insertBefore(oTextarea);
+                    width: oTextArea.width(),
+                    height: oTextArea.height(),
+                    'class': oTextArea.attr('class')
+                }).insertBefore(oTextArea);
 
-                oTextarea.css('display', 'none');
+                oTextArea.css('display', 'none');
 
                 var oEditor = ace.edit(oEditDiv[0]);
                 oEditor.renderer.setShowGutter(bGutter);
                 oEditor.setFontSize(sFontsize);
                 oEditor.setReadOnly(bReadonly);
 
-                oEditor.getSession().setValue(oTextarea.val());
+                oEditor.getSession().setValue(oTextArea.val());
                 oEditor.getSession().setMode('ace/mode/' + sMode);
                 oEditor.setTheme('ace/theme/' + sTheme);
 
                 // copy back to textarea on form submit...
-                oTextarea.closest('form').submit(function () {
-                    oTextarea.val(oEditor.getSession().getValue());
+                oTextArea.closest('form').submit(function () {
+                    oTextArea.val(oEditor.getSession().getValue());
                 })
+            }
+
+            // Add Ace editor to all textareas
+            jQuery('textarea[data-ace_language]').each(function () {
+                addAceEditor(jQuery(this));
             });
 
+            jQuery().registerAPFCallback( {
+                /**
+                * The repeatable field callback.
+                *
+                * When a repeat event occurs and a field is copied, this method will be triggered.
+                *
+                * @param  object  oCopied     the copied node object.
+                * @param  string  sFieldType  the field type slug
+                * @param  string  sFieldTagID the field container tag ID
+                * @param  integer iCallType   the caller type. 1 : repeatable sections. 0 : repeatable fields.
+                */
+                added_repeatable_field: function( oCopied, sFieldType, sFieldTagID, iCallType ) {
+                    if ( jQuery.inArray( sFieldType, {$_aJSArray} ) <= -1 ) return;
 
-//             jQuery().registerAPFCallback( {
+                    oCopied.closest( '.admin-page-framework-field' ).nextAll().andSelf().each( function( iIndex ) {
 
-//               /**
-//                * The repeatable field callback.
-//                *
-//                * When a repeat event occurs and a field is copied, this method will be triggered.
-//                *
-//                * @param  object  oCopied     the copied node object.
-//                * @param  string  sFieldType  the field type slug
-//                * @param  string  sFieldTagID the field container tag ID
-//                * @param  integer iCallType   the caller type. 1 : repeatable sections. 0 : repeatable fields.
-//                */
-//               added_repeatable_field: function( oCopied, sFieldType, sFieldTagID, iCallType ) {
+                        var oTextArea = jQuery( this ).find( 'textarea[data-ace_language]' );
+                        if ( oTextArea.length <= 0 ) return true;
 
-//                   /* If it is not this field type, do nothing. */
-//                   if ( jQuery.inArray( sFieldType, {$_aJSArray} ) <= -1 ) {
-//                       return;
-//                   }
-
-//                   /* If the input tag is not found, do nothing  */
-// //                  var oAceEditor = oCopied.find( 'textarea[data-ace_language]' );
-//                   var oAceEditor = oCopied.find( '.ace_editor' );
-//                   if ( oAceEditor.length <= 0 ) {
-//                     alert('hmpf');
-//                       return;
-//                   }
-
-//                 // Find the wrapper element
-//                 var oWrapper = oAceEditor.closest( 'label' ).children( 'div' );
-                
-//                 // Not sure why but it needs to be cloned again (the framework repeater script clones it internally though)
-//                 var oClone = oAceEditor.clone();    
-//                 jQuery( oWrapper ).replaceWith( oClone );
-
-//               }
-
-//             });
+                        if (0 === iIndex) { // the newly added field
+                            jQuery( this ).find( '.ace_editor').first().remove();
+                            oTextArea.val( '' );    // only delete the value of the directly copied one
+                            oTextArea.empty();      // the above use of val( '' ) does not erase the value completely.
+                            addAceEditor(oTextArea);
+                        }
+                    });
+                    return false;
+                }
+            });
 
         });";
-
     }
 
     /**
@@ -160,7 +155,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
             if (false === $value) $value = 0;
             $aInputAttributes['data-ace_' . $key] = $value;
         }
-
+        unset( $aField['attributes']['value'] );
         $aInputAttributes =  array_merge($aInputAttributes, $aField['attributes']);
 
         return
@@ -168,10 +163,10 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
             . "<div class='admin-page-framework-input-label-container'>"
                 . "<label for='{$aField['input_id']}'>"
                     . $aField['before_input']
-                    . ( $aField['label'] && ! $aField['repeatable']
-                        ? "<span class='admin-page-framework-input-label-string' style='min-width:" .  $aField['label_min_width'] . "px;'>" . $aField['label'] . "</span>"
-                        : ""
-                    )
+                    //. ( $aField['label'] && ! $aField['repeatable']
+                    //    ? "<span class='admin-page-framework-input-label-string' style='min-width:" .  $aField['label_min_width'] . "px;'>" . $aField['label'] . "</span>"
+                    //    : ""
+                    //)
                     . "<textarea " . $this->generateAttributes( $aInputAttributes  ) . " >" 
                             . $aField['value']
                     . "</textarea>"
