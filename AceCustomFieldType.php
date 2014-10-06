@@ -168,6 +168,5 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
             . $aField['after_label']
             ;
     }
-
 }
 endif;
