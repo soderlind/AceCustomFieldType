@@ -65,6 +65,8 @@ class My_Settings extends AdminPageFramework {
 }
 ```
 
+##Todo
+* Add support for revealer
 
 ##Changelog
 * 0.0.3 Added support for `'repeatable' => true`
