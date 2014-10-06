@@ -13,15 +13,13 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
     /**
      * Defines the default key-values of this field type settings.
      *
-     * @remark\t^t  $_aDefaultKeys holds shared default key-values defined in the base class.
+     * @remark\ $_aDefaultKeys holds shared default key-values defined in the base class.
      */
     protected $aDefaultKeys = array(
-        'type'        => 'textarea',
         'attributes'    =>  array(
             'cols'        => 60,
             'rows'        => 4,
         ),
-        //
         'options'   => array(
             'language'              => 'css',
             'theme'                 => 'chrome',
@@ -49,8 +47,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
     }
 
     protected function getEnqueuingStyles() {
-        return array(
-        );
+        return array();
     }
 
     /**
@@ -58,18 +55,16 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
      */
     protected function getScripts() {
 
-//      add_action( 'admin_footer', array( $this, '_replyToAddLinkModalQueryPlugin' ) );
         $_aJSArray = json_encode( $this->aFieldTypeSlugs );
         return "jQuery( document ).ready( function(){
-
             // Add Ace editor to textarea  from: http://stackoverflow.com/a/19513428/1434155
             var addAceEditor = function(oTextArea) {
 
-                var sMode = oTextArea.data('ace_language');
-                var sTheme = oTextArea.data('ace_theme');
-                var bGutter = ( undefined !== oTextArea.data('ace_gutter') ) ? oTextArea.data('ace_gutter') : 1;
-                var bReadonly = ( undefined !== oTextArea.data('ace_readonly') ) ? oTextArea.data('ace_readonly') : 0;
-                var sFontsize = ( undefined !== oTextArea.data('ace_fontsize') ) ? oTextArea.data('ace_fontsize') : 12;
+                var sMode     = oTextArea.data('ace_language');
+                var sTheme    = oTextArea.data('ace_theme');
+                var bGutter   = oTextArea.data('ace_gutter');
+                var bReadonly = oTextArea.data('ace_readonly');
+                var iFontsize = oTextArea.data('ace_fontsize');
 
                 var oEditDiv = jQuery('<div>', {
                     position: 'absolute',
@@ -82,7 +77,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 
                 var oEditor = ace.edit(oEditDiv[0]);
                 oEditor.renderer.setShowGutter(bGutter);
-                oEditor.setFontSize(sFontsize);
+                oEditor.setFontSize(iFontsize);
                 oEditor.setReadOnly(bReadonly);
 
                 oEditor.getSession().setValue(oTextArea.val());
@@ -163,10 +158,6 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
             . "<div class='admin-page-framework-input-label-container'>"
                 . "<label for='{$aField['input_id']}'>"
                     . $aField['before_input']
-                    //. ( $aField['label'] && ! $aField['repeatable']
-                    //    ? "<span class='admin-page-framework-input-label-string' style='min-width:" .  $aField['label_min_width'] . "px;'>" . $aField['label'] . "</span>"
-                    //    : ""
-                    //)
                     . "<textarea " . $this->generateAttributes( $aInputAttributes  ) . " >" 
                             . $aField['value']
                     . "</textarea>"
