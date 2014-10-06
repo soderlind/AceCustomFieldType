@@ -2,7 +2,7 @@
 
 An [Ace](http://ace.c9.io/) Custom Field Type for the [Admin Page Framework](https://github.com/michaeluno/admin-page-framework)
 
-![AceCustomFieldType](AceCustomFieldType.png)
+[![AceCustomFieldType - 'gutter' => true](AceCustomFieldType.png)]
 
 ##Download
 To clone AceCustomFieldType, including the `ace-builds` [submodule](https://github.com/ajaxorg/ace-builds), you need to use the git `--recursive` parameter: 
@@ -68,6 +68,6 @@ class My_Settings extends AdminPageFramework {
 * Add repeater
 
 ##Changelog
-* 0.0.2 Keeping it simple, AceCustomFieldType is feature complete ie you can cange language, theme and fontsize, enable/disable gutter and make it readonly.
+* 0.0.2 Keeping it simple, AceCustomFieldType is feature complete, i.e. you can change language, theme and fontsize, enable/disable gutter and make it readonly.
 * 0.0.1 Initial working release, there's still a lot todo
 
