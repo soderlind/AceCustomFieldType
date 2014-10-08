@@ -4,18 +4,6 @@ An [Ace](http://ace.c9.io/) Custom Field Type for the [Admin Page Framework](htt
 
 ![AceCustomFieldType - 'gutter' => true](AceCustomFieldType.png)
 
-##Download
-To clone AceCustomFieldType, including the `ace-builds` [submodule](https://github.com/ajaxorg/ace-builds), you need to use the git `--recursive` parameter: 
-
-	git clone --recursive https://github.com/soderlind/AceCustomFieldType.git
-
-If you forgot to add the submodule, do
-
-
-	git submodule init
-	git submodule update
-
-
 
 ##Adding AceCustomFieldType
 
@@ -68,6 +56,7 @@ class My_Settings extends AdminPageFramework {
 
 
 ##Changelog
+* 1.0.0 Cleaned up files, the `ace-builds` folder is no longer a submodule and only contains the src-min-noconflict build. The revealer bug, mentioned below, is fixed in Admin Page Framework 3.3.0 
 * 0.0.4 Added support for `'type' => 'revealer'`. Note [there's a bug in revealer](https://github.com/michaeluno/admin-page-framework/issues/147), preventing it from saving state 
 * 0.0.3 Added support for `'repeatable' => true`
 * 0.0.2 Keeping it simple, AceCustomFieldType is feature complete, i.e. you can change language, theme and fontsize, enable/disable gutter and make it readonly.
