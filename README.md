@@ -65,10 +65,10 @@ class My_Settings extends AdminPageFramework {
 }
 ```
 
-##Todo
-* Add support for revealer
+
 
 ##Changelog
+* 0.0.4 Added support for `'type' => 'revealer'`. Note [there's a bug in revealer](https://github.com/michaeluno/admin-page-framework/issues/147), preventing it from saving state 
 * 0.0.3 Added support for `'repeatable' => true`
 * 0.0.2 Keeping it simple, AceCustomFieldType is feature complete, i.e. you can change language, theme and fontsize, enable/disable gutter and make it readonly.
 * 0.0.1 Initial working release, there's still a lot todo

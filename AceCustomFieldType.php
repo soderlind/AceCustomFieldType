@@ -57,6 +57,23 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 
         $_aJSArray = json_encode( $this->aFieldTypeSlugs );
         return "jQuery( document ).ready( function(){
+            var getWidth = function( oElement ){
+                var _oClone = oElement.clone();
+                _oClone.css( 'visibility', 'hidden' );
+                jQuery( 'body' ).append( _oClone );
+                var iWidth = _oClone.outerWidth();
+                _oClone.remove();
+                return iWidth;
+            };
+            var getHeight = function( oElement ){
+                var _oClone = oElement.clone();
+                _oClone.css( 'visibility', 'hidden' );
+                jQuery( 'body' ).append( _oClone );
+                var iHeight = _oClone.outerHeight();
+                _oClone.remove();
+                return iHeight;
+            };
+
             // Add Ace editor to textarea  from: http://stackoverflow.com/a/19513428/1434155
             var addAceEditor = function(oTextArea) {
 
@@ -68,8 +85,8 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 
                 var oEditDiv = jQuery('<div>', {
                     position: 'absolute',
-                    width: oTextArea.width(),
-                    height: oTextArea.height(),
+                    width: getWidth( oTextArea ),
+                    height: getHeight( oTextArea ),
                     'class': oTextArea.attr('class')
                 }).insertBefore(oTextArea);
 
@@ -83,6 +100,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
                 oEditor.getSession().setValue(oTextArea.val());
                 oEditor.getSession().setMode('ace/mode/' + sMode);
                 oEditor.setTheme('ace/theme/' + sTheme);
+                oEditor.resize( true );
 
                 // copy back to textarea on form submit...
                 oTextArea.closest('form').submit(function () {
