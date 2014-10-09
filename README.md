@@ -56,8 +56,8 @@ class My_Settings extends AdminPageFramework {
 
 
 ##Changelog
-* 1.0.0 Cleaned up files, the `ace-builds` folder is no longer a submodule and only contains the src-min-noconflict build. The revealer bug, mentioned below, is fixed in Admin Page Framework 3.3.0 
-* 0.0.4 Added support for `'type' => 'revealer'`. Note [there's a bug in revealer](https://github.com/michaeluno/admin-page-framework/issues/147), preventing it from saving state 
+* 1.0.0 Cleaned up files, the `ace-builds` folder is no longer a submodule and only contains the src-min-noconflict build. The missing feature, mentioned below, is added in Admin Page Framework 3.3.0 
+* 0.0.4 Added support for `'type' => 'revealer'`. Note [a missing feature in revealer](https://github.com/michaeluno/admin-page-framework/issues/147), preventing it from saving state 
 * 0.0.3 Added support for `'repeatable' => true`
 * 0.0.2 Keeping it simple, AceCustomFieldType is feature complete, i.e. you can change language, theme and fontsize, enable/disable gutter and make it readonly.
 * 0.0.1 Initial working release, there's still a lot todo
