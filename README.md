@@ -56,7 +56,7 @@ class My_Settings extends AdminPageFramework {
 
 ##cdnjs
 
-Due to the size of ace-builds library (note, ace only loads the needed librabries), AceCustomFieldType is [using cdnjs](https://github.com/soderlind/AceCustomFieldType/blob/master/AceCustomFieldType.php#L45):
+AceCustomFieldType is [using cdnjs](https://github.com/soderlind/AceCustomFieldType/blob/master/AceCustomFieldType.php#L45):
 
 ```php
 protected function getEnqueuingScripts() {
