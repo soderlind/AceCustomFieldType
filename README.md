@@ -54,8 +54,30 @@ class My_Settings extends AdminPageFramework {
 ```
 
 
+##cdnjs
+
+Due to the size of ace-builds library (note, ace only loads the needed librabries), AceCustomFieldType is [using cdnjs](https://github.com/soderlind/AceCustomFieldType/blob/master/AceCustomFieldType.php#L45):
+
+```php
+protected function getEnqueuingScripts() {
+    return array(
+        array( 'src'    => '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js', 'dependencies'    => array( 'jquery' ) ),
+        /**
+         * If you'd like to use a local ace library:
+         *
+         * 1) Go to the same folder as this file
+         * 2) Clone ace-builds: git clone https://github.com/ajaxorg/ace-builds.git
+         * 3) Remove the line above this comment section
+         * 4) Uncomment the line below this comment section
+         */
+        //array( 'src'    => dirname( __FILE__ ) . '/ace-builds/src-min-noconflict/ace.js', 'dependencies'    => array( 'jquery' ) ),
+    );
+}
+```
+
 
 ##Changelog
+* 1.1.0 Removed local ace-builds library. AceCustomFieldType is now using  http://cdnjs.com/libraries/ace/
 * 1.0.0 Cleaned up files, the `ace-builds` folder is no longer a submodule and only contains the src-min-noconflict build. The missing feature, mentioned below, is added in Admin Page Framework 3.3.0 
 * 0.0.4 Added support for `'type' => 'revealer'`. Note [a missing feature in revealer](https://github.com/michaeluno/admin-page-framework/issues/147) is preventing it from saving state 
 * 0.0.3 Added support for `'repeatable' => true`
