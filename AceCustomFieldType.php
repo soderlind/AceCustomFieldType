@@ -42,7 +42,16 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
      */
     protected function getEnqueuingScripts() {
         return array(
-            array( 'src'    => dirname( __FILE__ ) . '/ace-builds/src-min-noconflict/ace.js', 'dependencies'    => array( 'jquery' ) ),
+            array( 'src'    => '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js', 'dependencies'    => array( 'jquery' ) ),
+            /**
+             * If you'd like to use a local ace library:
+             *
+             * 1) Go to the same folder as this file
+             * 2) Clone ace-builds: git clone https://github.com/ajaxorg/ace-builds.git
+             * 3) Remove the line above this comment section
+             * 4) Uncomment the line below this comment section
+             */
+            //array( 'src'    => dirname( __FILE__ ) . '/ace-builds/src-min-noconflict/ace.js', 'dependencies'    => array( 'jquery' ) ),
         );
     }
 
