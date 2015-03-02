@@ -2,7 +2,7 @@
 /**
  * AceCustomFieldType, for the  Admin Page Framework by Michael Uno, is written by Per Soderlind - http://soderlind.no
  */
-if ( ! class_exists( 'AceCustomFieldType' ) ) :
+if ( ! class_exists( 'AceCustomFieldType' ) && class_exists( 'AdminPageFramework_FieldType' )) :
 class AceCustomFieldType extends AdminPageFramework_FieldType {
 
     /**
@@ -42,7 +42,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
      */
     protected function getEnqueuingScripts() {
         return array(
-            array( 'src'    => '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js', 'dependencies'    => array( 'jquery' ) ),
+            array( 'src'    => ( is_ssl() ? 'https:' : 'http:' ) . '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js', 'dependencies'    => array( 'jquery' ) ),
             /**
              * If you'd like to use a local ace library:
              *
@@ -122,6 +122,12 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
                 addAceEditor(jQuery(this));
             });
 
+            jQuery(document).on('widget-updated', function(e, widget){
+                jQuery('textarea[data-ace_language]').each(function () {
+                    addAceEditor(jQuery(this));
+                });
+            });
+
             jQuery().registerAPFCallback( {
                 /**
                 * The repeatable field callback.
@@ -186,7 +192,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
                 . "<label for='{$aField['input_id']}'>"
                     . $aField['before_input']
                     . "<textarea " . $this->generateAttributes( $aInputAttributes  ) . " >" 
-                            . $aField['value']
+                            . esc_textarea($aField['value'])
                     . "</textarea>"
                     . $aField['after_input']
                 . "</label>"
