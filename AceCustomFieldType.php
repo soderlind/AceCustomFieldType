@@ -63,7 +63,6 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
      * Returns the field type specific JavaScript script.
      */
     protected function getScripts() {
-
         $_aJSArray = json_encode( $this->aFieldTypeSlugs );
         return "jQuery( document ).ready( function(){
             var getWidth = function( oElement ){
@@ -111,10 +110,9 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
                 oEditor.setTheme('ace/theme/' + sTheme);
                 oEditor.resize( true );
 
-                // copy back to textarea on form submit...
-                oTextArea.closest('form').submit(function () {
+                oEditor.getSession().on('change', function () {
                     oTextArea.val(oEditor.getSession().getValue());
-                })
+                });
             }
 
             // Add Ace editor to all textareas
@@ -123,7 +121,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
             });
 
             jQuery(document).on('widget-updated', function(e, widget){
-                jQuery('textarea[data-ace_language]').each(function () {
+                jQuery(widget).find('textarea[data-ace_language]').each(function () {
                     addAceEditor(jQuery(this));
                 });
             });
