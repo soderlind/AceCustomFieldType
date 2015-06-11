@@ -93,7 +93,7 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
 
                 var oEditDiv = jQuery('<div>', {
                     position: 'absolute',
-                    width: getWidth( oTextArea ),
+                    //width: getWidth( oTextArea ),
                     height: getHeight( oTextArea ),
                     'class': oTextArea.attr('class')
                 }).insertBefore(oTextArea);
@@ -109,6 +109,9 @@ class AceCustomFieldType extends AdminPageFramework_FieldType {
                 oEditor.getSession().setMode('ace/mode/' + sMode);
                 oEditor.setTheme('ace/theme/' + sTheme);
                 oEditor.resize( true );
+
+                jQuery(oEditDiv[0]).parents('.admin-page-framework-input-label-container').css('display', 'block');
+                jQuery(oEditDiv[0]).parents('.admin-page-framework-field-ace').css('width', '100%');
 
                 oEditor.getSession().on('change', function () {
                     oTextArea.val(oEditor.getSession().getValue());
